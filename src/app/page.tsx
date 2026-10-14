@@ -45,17 +45,10 @@ async function getFeaturedProducts() {
   }
 }
 
-export default async function HomePage({
-  searchParams,
-}: {
-  searchParams?: Promise<{ preview?: string }>;
-}) {
-  const resolvedParams = searchParams ? await searchParams : {};
-  if (resolvedParams?.preview !== "true") {
-    const session = await auth();
-    if ((session?.user as any)?.role === "admin") {
-      redirect("/admin");
-    }
+export default async function HomePage() {
+  const session = await auth();
+  if ((session?.user as any)?.role === "admin") {
+    redirect("/admin");
   }
   const featuredProducts = await getFeaturedProducts();
 
