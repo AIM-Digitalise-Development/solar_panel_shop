@@ -185,10 +185,7 @@ export default function AdminProductsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100/60 pb-16">
-      <AdminNav />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <div className="space-y-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
@@ -287,7 +284,6 @@ export default function AdminProductsPage() {
             </div>
           )}
         </div>
-      </div>
 
       {/* Product Create/Edit Modal */}
       {modalOpen && (

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
@@ -19,6 +19,7 @@ import {
   CheckCircle2,
   PhoneCall,
   Sparkles,
+  ArrowRight,
 } from "lucide-react";
 
 export function Navbar() {
@@ -51,69 +52,81 @@ export function Navbar() {
 
   const role = (session?.user as any)?.role;
 
+  // IMPORTANT: All React hooks above MUST run unconditionally.
+  // Do not render storefront navbar when viewing dedicated admin portal routes.
+  if (pathname && pathname.startsWith("/admin")) {
+    return null;
+  }
+
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
       {/* Top Banner */}
       <div className="bg-linear-to-r from-sky-900 via-blue-900 to-teal-900 text-white text-xs py-1.5 px-4">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1.5">
           <div className="flex items-center gap-3">
-            <span className="inline-flex items-center gap-1 font-medium text-amber-300">
-              <Sparkles className="w-3.5 h-3.5" /> PM Surya Ghar: Muft Bijli Yojana
+            <span className="flex items-center gap-1 font-semibold text-amber-300">
+              <Sparkles className="w-3.5 h-3.5" /> PM Surya Ghar Scheme
             </span>
             <span className="hidden md:inline text-sky-200">|</span>
             <span className="hidden md:inline text-sky-100">
-              Claim up to ₹78,000 Direct Central Subsidy on Rooftop Solar
+              Avail up to &#8377;78,000 Direct Central Subsidy on 3kW+ Rooftop Systems
             </span>
           </div>
-          <div className="flex items-center gap-4 text-sky-200">
-            <span className="inline-flex items-center gap-1">
-              <Shield className="w-3.5 h-3.5 text-emerald-400" /> ALMM & MNRE Certified
-            </span>
-            <a
-              href="tel:18002121786"
-              className="inline-flex items-center gap-1 hover:text-white transition-colors"
-            >
-              <PhoneCall className="w-3 h-3 text-amber-400" /> 1800-2121-SUN
-            </a>
+
+          <div className="flex items-center gap-4 text-[11px] text-sky-200">
+            <div className="flex items-center gap-1">
+              <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+              <span>ALMM &amp; MNRE Approved</span>
+            </div>
+            <span>|</span>
+            <div className="flex items-center gap-1">
+              <PhoneCall className="w-3 h-3 text-sky-300" />
+              <span>Toll Free: 1800-SOLAR-00</span>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Main Navbar */}
+      {/* Main Nav Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-18">
-          {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-linear-to-br from-amber-400 via-orange-500 to-amber-600 flex items-center justify-center shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
-              <Sun className="w-6 h-6 text-white animate-spin-slow" />
+        <div className="flex items-center justify-between h-20 gap-4">
+          {/* Logo & Brand */}
+          <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
+            <div className="w-11 h-11 rounded-2xl bg-linear-to-br from-amber-400 via-orange-500 to-amber-600 text-white flex items-center justify-center shadow-lg shadow-orange-500/20 group-hover:scale-105 transition-all">
+              <Sun className="w-6 h-6 animate-spin-slow" />
             </div>
             <div>
-              <span className="text-2xl font-black tracking-tight text-slate-900 flex items-center gap-1">
-                Solar<span className="text-sky-600">Shop</span>
-              </span>
-              <span className="block text-[10px] uppercase tracking-wider font-semibold text-slate-500 -mt-1">
-                Renewable Energy Direct
-              </span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                  Solar<span className="text-sky-600">Shop</span>
+                </span>
+                <span className="px-1.5 py-0.5 text-[10px] font-bold bg-amber-100 text-amber-800 rounded-md">
+                  INDIA
+                </span>
+              </div>
+              <p className="text-[10px] font-semibold text-slate-400 tracking-wider uppercase">
+                Clean Rooftop Power
+              </p>
             </div>
           </Link>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors flex items-center gap-1.5 ${
+                  className={`relative px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-1.5 ${
                     isActive
-                      ? "text-sky-700 bg-sky-50 font-semibold"
-                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                      ? "text-sky-600 bg-sky-50"
+                      : "text-slate-700 hover:text-sky-600 hover:bg-slate-50"
                   }`}
                 >
                   {link.name}
                   {link.badge && (
-                    <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider">
+                    <span className="text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-700">
                       {link.badge}
                     </span>
                   )}
@@ -143,89 +156,89 @@ export function Navbar() {
             {status === "loading" ? (
               <div className="w-8 h-8 rounded-full bg-slate-100 animate-pulse" />
             ) : session?.user ? (
-              <div className="relative" ref={dropdownRef}>
-                <button
-                  onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-                  className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-100 transition-colors border border-slate-200 text-left"
+              role === "admin" ? (
+                /* Super Admin on Storefront: Direct link straight to Admin Operations Portal! No customer links. */
+                <Link
+                  href="/admin"
+                  className="flex items-center gap-2 px-3.5 py-2 text-xs font-bold rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-400 border border-amber-400/30 shadow-md shadow-amber-500/10 transition-all"
                 >
-                  <div className="w-8 h-8 rounded-full bg-linear-to-br from-sky-600 to-teal-600 text-white flex items-center justify-center font-bold text-sm">
-                    {session.user.name?.[0]?.toUpperCase() || "U"}
-                  </div>
-                  <div className="hidden sm:block text-xs">
-                    <p className="font-semibold text-slate-800 leading-tight truncate max-w-[100px]">
-                      {session.user.name?.split(" ")[0]}
-                    </p>
-                    <p className="text-[10px] text-slate-500 capitalize">{role || "Customer"}</p>
-                  </div>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
-                </button>
-
-                {/* Profile Dropdown Menu */}
-                {profileDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50 divide-y divide-slate-100">
-                    <div className="px-4 py-2.5">
-                      <p className="text-sm font-semibold text-slate-900">{session.user.name}</p>
-                      <p className="text-xs text-slate-500 truncate">{session.user.email}</p>
-                      <span className="inline-block mt-1 text-[10px] font-semibold uppercase px-2 py-0.5 rounded-md bg-sky-100 text-sky-800">
-                        {role === "admin" ? "System Admin" : "Verified Customer"}
-                      </span>
+                  <Shield className="w-4 h-4 text-amber-400" />
+                  <span>Admin Dashboard</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              ) : (
+                /* Verified Customer Dropdown */
+                <div className="relative" ref={dropdownRef}>
+                  <button
+                    onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
+                    className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-100 transition-colors border border-slate-200 text-left"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-linear-to-br from-sky-600 to-teal-600 text-white flex items-center justify-center font-bold text-sm">
+                      {session.user.name?.[0]?.toUpperCase() || "U"}
                     </div>
-
-                    <div className="py-1">
-                      <Link
-                        href="/profile"
-                        onClick={() => setProfileDropdownOpen(false)}
-                        className="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-sky-600"
-                      >
-                        <User className="w-4 h-4 text-slate-400" />
-                        My Profile
-                      </Link>
-                      <Link
-                        href="/my-quotes"
-                        onClick={() => setProfileDropdownOpen(false)}
-                        className="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-sky-600"
-                      >
-                        <FileText className="w-4 h-4 text-slate-400" />
-                        My Quote Requests
-                      </Link>
-                      <Link
-                        href="/my-orders"
-                        onClick={() => setProfileDropdownOpen(false)}
-                        className="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-sky-600"
-                      >
-                        <ShoppingBag className="w-4 h-4 text-slate-400" />
-                        Order History
-                      </Link>
+                    <div className="hidden sm:block text-xs">
+                      <p className="font-semibold text-slate-800 leading-tight truncate max-w-[100px]">
+                        {session.user.name?.split(" ")[0]}
+                      </p>
+                      <p className="text-[10px] text-slate-500 capitalize">{role || "Customer"}</p>
                     </div>
+                    <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                  </button>
 
-                    {role === "admin" && (
-                      <div className="py-1 bg-amber-50/50">
+                  {/* Profile Dropdown Menu for Customers */}
+                  {profileDropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50 divide-y divide-slate-100">
+                      <div className="px-4 py-2.5">
+                        <p className="text-sm font-semibold text-slate-900">{session.user.name}</p>
+                        <p className="text-xs text-slate-500 truncate">{session.user.email}</p>
+                        <span className="inline-block mt-1 text-[10px] font-semibold uppercase px-2 py-0.5 rounded-md bg-sky-100 text-sky-800">
+                          Verified Customer
+                        </span>
+                      </div>
+
+                      <div className="py-1">
                         <Link
-                          href="/admin"
+                          href="/profile"
                           onClick={() => setProfileDropdownOpen(false)}
-                          className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-amber-900 hover:bg-amber-100/50"
+                          className="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-sky-600"
                         >
-                          <Shield className="w-4 h-4 text-amber-600" />
-                          Admin Dashboard
+                          <User className="w-4 h-4 text-slate-400" />
+                          My Profile
+                        </Link>
+                        <Link
+                          href="/my-quotes"
+                          onClick={() => setProfileDropdownOpen(false)}
+                          className="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-sky-600"
+                        >
+                          <FileText className="w-4 h-4 text-slate-400" />
+                          My Quote Requests
+                        </Link>
+                        <Link
+                          href="/my-orders"
+                          onClick={() => setProfileDropdownOpen(false)}
+                          className="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-sky-600"
+                        >
+                          <ShoppingBag className="w-4 h-4 text-slate-400" />
+                          Order History
                         </Link>
                       </div>
-                    )}
 
-                    <div className="py-1">
-                      <button
-                        onClick={() => {
-                          setProfileDropdownOpen(false);
-                          signOut({ callbackUrl: "/" });
-                        }}
-                        className="w-full text-left flex items-center gap-2 px-4 py-2 text-sm text-rose-600 hover:bg-rose-50"
-                      >
-                        <LogOut className="w-4 h-4" />
-                        Sign Out
-                      </button>
+                      <div className="py-1">
+                        <button
+                          onClick={() => {
+                            setProfileDropdownOpen(false);
+                            signOut({ callbackUrl: "/" });
+                          }}
+                          className="w-full text-left flex items-center gap-2 px-4 py-2 text-sm text-rose-600 hover:bg-rose-50"
+                        >
+                          <LogOut className="w-4 h-4" />
+                          Sign Out
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
+              )
             ) : (
               <div className="flex items-center gap-2">
                 <Link
@@ -280,7 +293,20 @@ export function Navbar() {
             </Link>
           ))}
 
-          {!session && (
+          {session?.user && role === "admin" ? (
+            <div className="pt-4 border-t border-slate-100">
+              <Link
+                href="/admin"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between p-3 rounded-xl bg-slate-900 text-amber-400 font-bold text-xs border border-amber-400/30"
+              >
+                <span className="flex items-center gap-2">
+                  <Shield className="w-4 h-4" /> Open Admin Operations Hub
+                </span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          ) : !session ? (
             <div className="pt-4 border-t border-slate-100 flex flex-col gap-2">
               <Link
                 href="/login"
@@ -297,7 +323,7 @@ export function Navbar() {
                 Create Account
               </Link>
             </div>
-          )}
+          ) : null}
         </div>
       )}
     </header>

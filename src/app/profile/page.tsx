@@ -19,6 +19,10 @@ export default function ProfilePage() {
     if (status === "unauthenticated") {
       router.push("/login?callbackUrl=/profile");
     } else if (session?.user) {
+      if ((session.user as any).role === "admin") {
+        router.replace("/admin");
+        return;
+      }
       setName(session.user.name || "");
       setPhone((session.user as any).phone || "");
       setAddress((session.user as any).address || "");

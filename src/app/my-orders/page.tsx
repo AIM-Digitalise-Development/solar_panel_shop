@@ -18,6 +18,10 @@ export default function MyOrdersPage() {
       return;
     }
     if (session?.user) {
+      if ((session.user as any).role === "admin") {
+        router.replace("/admin/orders");
+        return;
+      }
       fetch("/api/orders")
         .then((res) => res.json())
         .then((data) => {

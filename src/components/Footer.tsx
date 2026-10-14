@@ -1,3 +1,6 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 ﻿import React from "react";
 import Link from "next/link";
 import {
@@ -14,6 +17,8 @@ import {
 } from "lucide-react";
 
 export function Footer() {
+  const pathname = usePathname();
+  if (pathname && pathname.startsWith("/admin")) return null;
   return (
     <footer className="bg-slate-950 text-slate-300 border-t border-slate-800">
       {/* Trust Badges Bar */}

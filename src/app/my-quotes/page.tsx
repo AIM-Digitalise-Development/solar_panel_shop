@@ -19,6 +19,10 @@ export default function MyQuotesPage() {
     }
 
     if (session?.user) {
+      if ((session.user as any).role === "admin") {
+        router.replace("/admin/quotes");
+        return;
+      }
       fetch("/api/quotes")
         .then((res) => res.json())
         .then((data) => {

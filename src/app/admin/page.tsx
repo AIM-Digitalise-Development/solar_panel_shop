@@ -48,10 +48,7 @@ export default async function AdminDashboardPage() {
   const recentSerialized = JSON.parse(JSON.stringify(recentQuotes));
 
   return (
-    <div className="min-h-screen bg-slate-100/60 pb-16">
-      <AdminNav />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+    <div className="space-y-8">
         {/* Welcome Banner */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
@@ -217,6 +214,5 @@ export default async function AdminDashboardPage() {
           </div>
         </div>
       </div>
-    </div>
   );
 }

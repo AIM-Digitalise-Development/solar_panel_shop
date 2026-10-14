@@ -1,21 +1,31 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { Sun, Lock, Mail, ShieldCheck, AlertCircle, ArrowRight } from "lucide-react";
 
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const { data: session, status } = useSession();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
   const [isFirstRun, setIsFirstRun] = useState(false);
+
+  // If already logged in as admin, immediately take inside admin dashboard
+  useEffect(() => {
+    if (session?.user) {
+      if ((session.user as any).role === "admin") {
+        router.replace("/admin");
+      }
+    }
+  }, [session, router]);
 
   useEffect(() => {
     fetch("/api/setup-admin")
@@ -42,13 +52,22 @@ function LoginForm() {
 
       if (res?.error) {
         setErrorMsg("Invalid email address or password. Please verify and retry.");
+        setLoading(false);
       } else {
-        router.push(callbackUrl);
+        // Fetch session to determine role and redirect accordingly
+        const sessionRes = await fetch("/api/auth/session");
+        const sessionData = await sessionRes.json();
+
+        if (sessionData?.user?.role === "admin") {
+          // Administrator goes straight to the dedicated admin dashboard!
+          router.push("/admin");
+        } else {
+          router.push(callbackUrl === "/admin" ? "/profile" : callbackUrl);
+        }
         router.refresh();
       }
     } catch (err: any) {
       setErrorMsg("Failed to sign in. Please try again.");
-    } finally {
       setLoading(false);
     }
   };
@@ -69,7 +88,7 @@ function LoginForm() {
           Welcome to SolarShop
         </h1>
         <p className="text-xs sm:text-sm text-slate-500">
-          Sign in to track your quotation requests, review engineering estimates, and manage orders.
+          Sign in to access your administrative operations hub or manage customer solar quotations.
         </p>
       </div>
 
@@ -96,13 +115,13 @@ function LoginForm() {
       {!isFirstRun && (
         <div className="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 text-xs space-y-2.5">
           <p className="font-bold text-amber-900 flex items-center gap-1.5">
-            <ShieldCheck className="w-4 h-4 text-amber-600" /> Demo Accounts for Rapid Evaluation
+            <ShieldCheck className="w-4 h-4 text-amber-600" /> Fast-Sign-In Credentials
           </p>
           <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
               onClick={() => handleQuickLogin("admin@solarshop.in", "Admin@123456")}
-              className="py-1.5 px-2.5 bg-white hover:bg-amber-100 text-amber-900 font-semibold border border-amber-300 rounded-lg text-left"
+              className="py-1.5 px-2.5 bg-white hover:bg-amber-100 text-amber-900 font-semibold border border-amber-300 rounded-lg text-left transition-colors"
             >
               Fill Admin
               <span className="block text-[10px] text-amber-700 font-normal">admin@solarshop.in</span>
@@ -110,7 +129,7 @@ function LoginForm() {
             <button
               type="button"
               onClick={() => handleQuickLogin("customer@example.com", "Customer@123456")}
-              className="py-1.5 px-2.5 bg-white hover:bg-amber-100 text-amber-900 font-semibold border border-amber-300 rounded-lg text-left"
+              className="py-1.5 px-2.5 bg-white hover:bg-amber-100 text-amber-900 font-semibold border border-amber-300 rounded-lg text-left transition-colors"
             >
               Fill Customer
               <span className="block text-[10px] text-amber-700 font-normal">customer@example.com</span>
@@ -153,7 +172,7 @@ function LoginForm() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
+                placeholder="        "
                 className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500"
               />
               <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -165,7 +184,7 @@ function LoginForm() {
             disabled={loading}
             className="w-full py-3.5 px-4 bg-sky-600 hover:bg-sky-700 text-white font-bold text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2"
           >
-            {loading ? "Signing In..." : "Sign In to Account"} &rarr;
+            {loading ? "Signing In..." : "Sign In"} &rarr;
           </button>
         </form>
 

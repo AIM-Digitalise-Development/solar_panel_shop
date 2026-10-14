@@ -80,10 +80,7 @@ export default function AdminQuotesListPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100/60 pb-16">
-      <AdminNav />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <div className="space-y-8">
         <div>
           <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
             Customer Quotation Requests
@@ -188,6 +185,5 @@ export default function AdminQuotesListPage() {
           )}
         </div>
       </div>
-    </div>
   );
 }
