@@ -2,15 +2,14 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
-import { Sun, Lock, Mail, ShieldCheck, AlertCircle, ArrowRight } from "lucide-react";
+import { Sun, Lock, Mail, ShieldCheck, ArrowRight } from "lucide-react";
 
 function LoginForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,12 +19,10 @@ function LoginForm() {
 
   // If already logged in as admin, immediately take inside admin dashboard
   useEffect(() => {
-    if (session?.user) {
-      if ((session.user as any).role === "admin") {
-        router.replace("/admin");
-      }
+    if (session?.user && (session.user as any).role === "admin") {
+      window.location.href = "/admin";
     }
-  }, [session, router]);
+  }, [session]);
 
   useEffect(() => {
     fetch("/api/setup-admin")
@@ -44,30 +41,43 @@ function LoginForm() {
     setLoading(true);
 
     try {
+      const normalizedEmail = email.trim().toLowerCase();
+
+      // 1. Validate credentials and verify role immediately
+      const checkRes = await fetch("/api/auth/login-check", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: normalizedEmail, password }),
+      });
+
+      const checkData = await checkRes.json();
+      if (!checkRes.ok) {
+        setErrorMsg(checkData.error || "Invalid email address or password.");
+        setLoading(false);
+        return;
+      }
+
+      // 2. Authorize session via NextAuth
       const res = await signIn("credentials", {
-        email: email.trim().toLowerCase(),
+        email: normalizedEmail,
         password,
         redirect: false,
       });
 
       if (res?.error) {
-        setErrorMsg("Invalid email address or password. Please verify and retry.");
+        setErrorMsg("Authentication failed. Please verify credentials.");
         setLoading(false);
-      } else {
-        // Fetch session to determine role and redirect accordingly
-        const sessionRes = await fetch("/api/auth/session");
-        const sessionData = await sessionRes.json();
+        return;
+      }
 
-        if (sessionData?.user?.role === "admin") {
-          // Administrator goes straight to the dedicated admin dashboard!
-          router.push("/admin");
-        } else {
-          router.push(callbackUrl === "/admin" ? "/profile" : callbackUrl);
-        }
-        router.refresh();
+      // 3. Admin goes directly and immediately into the Admin Dashboard Portal!
+      if (checkData.role === "admin") {
+        window.location.href = "/admin";
+      } else {
+        window.location.href = callbackUrl && callbackUrl !== "/admin" ? callbackUrl : "/profile";
       }
     } catch (err: any) {
-      setErrorMsg("Failed to sign in. Please try again.");
+      setErrorMsg(err.message || "Failed to sign in. Please try again.");
       setLoading(false);
     }
   };

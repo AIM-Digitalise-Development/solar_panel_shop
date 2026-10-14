@@ -1,3 +1,5 @@
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 ﻿import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -43,7 +45,18 @@ async function getFeaturedProducts() {
   }
 }
 
-export default async function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ preview?: string }>;
+}) {
+  const resolvedParams = searchParams ? await searchParams : {};
+  if (resolvedParams?.preview !== "true") {
+    const session = await auth();
+    if ((session?.user as any)?.role === "admin") {
+      redirect("/admin");
+    }
+  }
   const featuredProducts = await getFeaturedProducts();
 
   const benefits = [

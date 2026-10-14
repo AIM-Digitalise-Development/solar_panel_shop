@@ -219,7 +219,7 @@ export function AdminPortalShell({
             Public Website
           </div>
           <Link
-            href="/"
+            href="/?preview=true"
             target="_blank"
             className="flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white hover:bg-slate-900/60 transition-colors group"
           >
@@ -328,7 +328,7 @@ export function AdminPortalShell({
             </Link>
 
             <Link
-              href="/"
+              href="/?preview=true"
               target="_blank"
               className="hidden md:flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg border border-slate-200 transition-colors"
             >

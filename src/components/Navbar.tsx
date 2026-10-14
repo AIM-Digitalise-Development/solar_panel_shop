@@ -156,17 +156,7 @@ export function Navbar() {
             {status === "loading" ? (
               <div className="w-8 h-8 rounded-full bg-slate-100 animate-pulse" />
             ) : session?.user ? (
-              role === "admin" ? (
-                /* Super Admin on Storefront: Direct link straight to Admin Operations Portal! No customer links. */
-                <Link
-                  href="/admin"
-                  className="flex items-center gap-2 px-3.5 py-2 text-xs font-bold rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-400 border border-amber-400/30 shadow-md shadow-amber-500/10 transition-all"
-                >
-                  <Shield className="w-4 h-4 text-amber-400" />
-                  <span>Admin Dashboard</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              ) : (
+              role === "admin" ? null : (
                 /* Verified Customer Dropdown */
                 <div className="relative" ref={dropdownRef}>
                   <button
@@ -293,20 +283,7 @@ export function Navbar() {
             </Link>
           ))}
 
-          {session?.user && role === "admin" ? (
-            <div className="pt-4 border-t border-slate-100">
-              <Link
-                href="/admin"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between p-3 rounded-xl bg-slate-900 text-amber-400 font-bold text-xs border border-amber-400/30"
-              >
-                <span className="flex items-center gap-2">
-                  <Shield className="w-4 h-4" /> Open Admin Operations Hub
-                </span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          ) : !session ? (
+          {!session ? (
             <div className="pt-4 border-t border-slate-100 flex flex-col gap-2">
               <Link
                 href="/login"
