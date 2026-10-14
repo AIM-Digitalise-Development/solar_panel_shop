@@ -24,6 +24,7 @@ import {
 
 export function Navbar() {
   const { data: session, status } = useSession();
+  const role = (session?.user as any)?.role;
   const { totalItems } = useQuoteCart();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -41,6 +42,13 @@ export function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Admin cannot stay on storefront while logged in as admin - redirect to admin portal
+  useEffect(() => {
+    if (role === "admin" && pathname && !pathname.startsWith("/admin") && pathname !== "/login") {
+      window.location.href = "/admin";
+    }
+  }, [role, pathname]);
+
   const navLinks = [
     { name: "Products", href: "/products" },
     { name: "PM Surya Ghar", href: "/pm-surya-ghar", badge: "Subsidy" },
@@ -49,8 +57,6 @@ export function Navbar() {
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ];
-
-  const role = (session?.user as any)?.role;
 
   // IMPORTANT: All React hooks above MUST run unconditionally.
   // Do not render storefront navbar when viewing dedicated admin portal routes.

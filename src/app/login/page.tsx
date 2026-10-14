@@ -17,12 +17,7 @@ function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [isFirstRun, setIsFirstRun] = useState(false);
 
-  // If already logged in as admin, immediately take inside admin dashboard
-  useEffect(() => {
-    if (session?.user && (session.user as any).role === "admin") {
-      window.location.href = "/admin";
-    }
-  }, [session]);
+
 
   useEffect(() => {
     fetch("/api/setup-admin")
