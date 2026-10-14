@@ -38,8 +38,20 @@ export async function POST(req: Request) {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Check current users count
+    const totalUsers = await User.countDocuments();
+    const adminCount = await User.countDocuments({ role: "admin" });
+
     let assignedRole: "customer" | "admin" = "customer";
-    if (role === "admin") {
+
+    // First-Time Setup Rule:
+    // If the users table is completely empty (or no administrator exists yet),
+    // automatically grant full Administrator privileges to this user!
+    const isFirstAdmin = totalUsers === 0 || adminCount === 0;
+
+    if (isFirstAdmin) {
+      assignedRole = "admin";
+    } else if (role === "admin") {
       const systemSecret = process.env.SETUP_SECRET || "Q3xT7mN1vR2kL6pW8yF1dS5h6nP8qX";
       if (adminSecret && adminSecret === systemSecret) {
         assignedRole = "admin";
@@ -62,7 +74,10 @@ export async function POST(req: Request) {
 
     return NextResponse.json(
       {
-        message: "Account created successfully.",
+        message: isFirstAdmin
+          ? "First-time administrator account created successfully! You now have full operational privileges."
+          : "Account created successfully.",
+        isFirstAdmin,
         user: {
           id: newUser._id.toString(),
           name: newUser.name,

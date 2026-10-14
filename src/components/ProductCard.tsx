@@ -35,21 +35,23 @@ export function ProductCard({ product }: { product: ProductProps }) {
 
   const defaultImage =
     product.images?.[0] ||
-    "https://images.unsplash.com/photo-1508873696983-2df5293cb395?auto=format&fit=crop&w=800&q=80";
+    "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=800&q=80";
 
   return (
     <div className="group bg-white rounded-2xl border border-slate-200 hover:border-sky-300 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
       <div>
         {/* Image & Badges */}
-        <Link href={`/products/${product.slug}`} className="block relative aspect-4/3 overflow-hidden bg-slate-100">
-          <Image
-            src={defaultImage}
-            alt={product.name}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-          <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+        <div className="relative h-52 w-full overflow-hidden bg-slate-100">
+          <Link href={`/products/${product.slug}`} className="block relative w-full h-full">
+            <Image
+              src={defaultImage}
+              alt={product.name}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          </Link>
+          <div className="absolute top-3 left-3 flex flex-col gap-1.5 pointer-events-none">
             <span className="bg-slate-900/80 backdrop-blur-xs text-white text-[11px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">
               {product.category}
             </span>
@@ -61,11 +63,11 @@ export function ProductCard({ product }: { product: ProductProps }) {
           </div>
 
           {product.featured && (
-            <span className="absolute top-3 right-3 bg-sky-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider shadow-xs">
+            <span className="absolute top-3 right-3 bg-sky-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider shadow-xs pointer-events-none">
               Top Rated
             </span>
           )}
-        </Link>
+        </div>
 
         {/* Content */}
         <div className="p-5">

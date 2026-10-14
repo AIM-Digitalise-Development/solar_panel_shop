@@ -178,7 +178,7 @@ export default async function HomePage() {
               <div className="relative rounded-3xl overflow-hidden border border-slate-800 bg-slate-900 shadow-2xl p-2">
                 <div className="relative h-80 sm:h-96 w-full rounded-2xl overflow-hidden">
                   <Image
-                    src="https://images.unsplash.com/photo-1508873696983-2df5293cb395?auto=format&fit=crop&w=1000&q=80"
+                    src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?auto=format&fit=crop&w=1000&q=80"
                     alt="Rooftop Solar Installation in India"
                     fill
                     priority

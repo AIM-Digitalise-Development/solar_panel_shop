@@ -1,10 +1,10 @@
 ﻿"use client";
 
-import React, { useState, Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { Sun, Lock, Mail, ShieldCheck } from "lucide-react";
+import { Sun, Lock, Mail, ShieldCheck, AlertCircle, ArrowRight } from "lucide-react";
 
 function LoginForm() {
   const router = useRouter();
@@ -15,6 +15,18 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isFirstRun, setIsFirstRun] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/setup-admin")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.isFirstRun) {
+          setIsFirstRun(true);
+        }
+      })
+      .catch((err) => console.error("Error checking first-run status:", err));
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,30 +73,51 @@ function LoginForm() {
         </p>
       </div>
 
-      {/* Demo Credentials Quick Box */}
-      <div className="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 text-xs space-y-2.5">
-        <p className="font-bold text-amber-900 flex items-center gap-1.5">
-          <ShieldCheck className="w-4 h-4 text-amber-600" /> Demo Accounts for Rapid Evaluation
-        </p>
-        <div className="grid grid-cols-2 gap-2">
-          <button
-            type="button"
-            onClick={() => handleQuickLogin("admin@solarshop.in", "Admin@123456")}
-            className="py-1.5 px-2.5 bg-white hover:bg-amber-100 text-amber-900 font-semibold border border-amber-300 rounded-lg text-left"
+      {/* If No Admin Exists Banner */}
+      {isFirstRun && (
+        <div className="p-4 bg-amber-50 border-2 border-amber-300 rounded-2xl text-xs space-y-2 shadow-xs">
+          <div className="flex items-center gap-2 font-bold text-amber-900 text-sm">
+            <ShieldCheck className="w-4 h-4 text-amber-600" /> First-Time Setup Required
+          </div>
+          <p className="text-amber-800 leading-relaxed">
+            No administrator accounts currently exist in your database. You can initialize the
+            primary root administrator account right now.
+          </p>
+          <Link
+            href="/register"
+            className="inline-flex items-center gap-1 font-bold text-amber-950 bg-amber-200/80 hover:bg-amber-300 px-3 py-1.5 rounded-lg transition-colors"
           >
-            Fill Admin
-            <span className="block text-[10px] text-amber-700 font-normal">admin@solarshop.in</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => handleQuickLogin("customer@example.com", "Customer@123456")}
-            className="py-1.5 px-2.5 bg-white hover:bg-amber-100 text-amber-900 font-semibold border border-amber-300 rounded-lg text-left"
-          >
-            Fill Customer
-            <span className="block text-[10px] text-amber-700 font-normal">customer@example.com</span>
-          </button>
+            Create Primary Admin Account &rarr;
+          </Link>
         </div>
-      </div>
+      )}
+
+      {/* Demo Credentials Quick Box (shown when accounts exist) */}
+      {!isFirstRun && (
+        <div className="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 text-xs space-y-2.5">
+          <p className="font-bold text-amber-900 flex items-center gap-1.5">
+            <ShieldCheck className="w-4 h-4 text-amber-600" /> Demo Accounts for Rapid Evaluation
+          </p>
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={() => handleQuickLogin("admin@solarshop.in", "Admin@123456")}
+              className="py-1.5 px-2.5 bg-white hover:bg-amber-100 text-amber-900 font-semibold border border-amber-300 rounded-lg text-left"
+            >
+              Fill Admin
+              <span className="block text-[10px] text-amber-700 font-normal">admin@solarshop.in</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleQuickLogin("customer@example.com", "Customer@123456")}
+              className="py-1.5 px-2.5 bg-white hover:bg-amber-100 text-amber-900 font-semibold border border-amber-300 rounded-lg text-left"
+            >
+              Fill Customer
+              <span className="block text-[10px] text-amber-700 font-normal">customer@example.com</span>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Main Login Card */}
       <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-xl space-y-6">

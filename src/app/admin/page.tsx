@@ -22,12 +22,18 @@ import {
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardPage() {
+  await connectDB();
+
+  // If no admin accounts exist in the database, redirect directly to registration wizard
+  const adminCountCheck = await User.countDocuments({ role: "admin" });
+  if (adminCountCheck === 0) {
+    redirect("/register");
+  }
+
   const session = await auth();
   if (!session || (session.user as any)?.role !== "admin") {
     redirect("/login?callbackUrl=/admin");
   }
-
-  await connectDB();
 
   const [totalQuotes, pendingQuotes, totalProducts, totalOrders, totalUsers, recentQuotes] =
     await Promise.all([

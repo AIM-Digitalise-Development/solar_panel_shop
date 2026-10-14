@@ -5,6 +5,22 @@ import { User } from "@/lib/models/User";
 
 export const dynamic = "force-dynamic";
 
+export async function GET() {
+  try {
+    await connectDB();
+    const totalUsers = await User.countDocuments();
+    const adminCount = await User.countDocuments({ role: "admin" });
+
+    return NextResponse.json({
+      isFirstRun: totalUsers === 0 || adminCount === 0,
+      totalUsers,
+      adminCount,
+    });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
+
 export async function POST(req: Request) {
   try {
     const { secret, email, name, password } = await req.json();
