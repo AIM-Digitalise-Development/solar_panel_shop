@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, Suspense } from "react";
+import { Logo } from "@/components/Logo";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
@@ -85,16 +86,18 @@ function LoginForm() {
   return (
     <div className="w-full max-w-md space-y-6">
       {/* Brand Header */}
-      <div className="text-center space-y-2">
-        <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-amber-400 to-orange-500 text-white flex items-center justify-center mx-auto shadow-md">
-          <Sun className="w-7 h-7" />
+      <div className="text-center space-y-3">
+        <Link href="/" className="inline-block py-1">
+          <Logo variant="dark" className="h-14 w-auto mx-auto" />
+        </Link>
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            Welcome to Aethel
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            Renewable solar energy solutions by T &amp; S Infraproject Pvt Ltd
+          </p>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-          Welcome to SolarShop
-        </h1>
-        <p className="text-xs sm:text-sm text-slate-500">
-          Sign in to access your administrative operations hub or manage customer solar quotations.
-        </p>
       </div>
 
       {/* If No Admin Exists Banner */}

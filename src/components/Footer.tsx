@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 ﻿import React from "react";
+import { Logo } from "@/components/Logo";
 import Link from "next/link";
 import {
   Sun,
@@ -71,31 +72,33 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center gap-2.5">
-              <div className="w-10 h-10 rounded-xl bg-linear-to-br from-amber-400 via-orange-500 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20">
-                <Sun className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-2xl font-black tracking-tight text-white">
-                Solar<span className="text-sky-400">Shop</span>
-              </span>
+            <Link href="/" className="inline-block py-1">
+              <Logo variant="white" className="h-10 w-auto" />
             </Link>
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
-              Empowering residential homeowners, housing societies, and industrial enterprises
-              across India with Tier-1 solar modules, smart grid-tied inverters, and high-yield
-              energy storage systems.
+              Aethel Renewables is the clean energy and solar infrastructure brand of <strong className="text-white font-semibold">T &amp; S Infraproject Pvt Ltd</strong>.
+              Delivering high-efficiency turnkey rooftop solar, MNRE ALMM equipment, and end-to-end PM Surya Ghar subsidy facilitation across India.
             </p>
-            <div className="pt-2 text-xs text-slate-400 space-y-2">
-              <p className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-sky-400 shrink-0" />
-                Solar Innovation Park, BKC, Mumbai, Maharashtra 400051
+            <div className="pt-2 text-xs text-slate-400 space-y-2 bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
+              <p className="text-white font-bold text-xs flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                T &amp; S Infraproject Pvt Ltd
               </p>
-              <p className="flex items-center gap-2">
+              <p className="flex items-start gap-2 text-slate-300">
+                <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <span>100/21, New Basudevpur Road, Belghoria, Kolkata 700056</span>
+              </p>
+              <p className="flex items-center gap-2 text-slate-300">
+                <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-amber-300 font-bold">GST</span>
+                <span className="font-mono font-semibold">19AAJCT6248H1ZV</span>
+              </p>
+              <p className="flex items-center gap-2 text-slate-300">
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
-                Toll-Free: 1800-2121-SUN / +91 (022) 6789-SOLAR
+                <span>+91 96144 75087</span>
               </p>
-              <p className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-amber-400 shrink-0" />
-                quotes@solarshop.in &bull; info@solarshop.in
+              <p className="flex items-center gap-2 text-slate-300">
+                <Mail className="w-4 h-4 text-sky-400 shrink-0" />
+                <a href="mailto:tandsinfra@gmail.com" className="hover:text-white transition-colors">tandsinfra@gmail.com</a>
               </p>
             </div>
           </div>
@@ -181,7 +184,7 @@ export function Footer() {
             <ul className="space-y-2.5 text-sm">
               <li>
                 <Link href="/about" className="hover:text-white transition-colors">
-                  About SolarShop
+                  About Aethel Renewables
                 </Link>
               </li>
               <li>
@@ -206,7 +209,7 @@ export function Footer() {
         {/* Disclaimer & Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-slate-800 text-xs text-slate-500 flex flex-col md:flex-row items-center justify-between gap-4">
           <p>
-            &copy; {new Date().getFullYear()} SolarShop India Pvt Ltd. All rights reserved.
+            &copy; {new Date().getFullYear()} Aethel Renewables. A brand of T &amp; S Infraproject Pvt Ltd (GST: 19AAJCT6248H1ZV). All rights reserved.
             Prices displayed are indicative. Final pricing and government subsidy eligibility are
             confirmed via formal quotation following physical rooftop engineering audit.
           </p>

@@ -54,7 +54,7 @@ export function PMSuryaGharSection() {
     {
       step: "01",
       title: "Rooftop Feasibility & Quote",
-      desc: "Select your solar system on SolarShop and receive a customized engineering quotation with subsidy calculations.",
+      desc: "Select your solar system on Aethel and receive a customized engineering quotation with subsidy calculations.",
     },
     {
       step: "02",
@@ -256,7 +256,7 @@ export function PMSuryaGharSection() {
               Ready to Claim Your ₹78,000 Subsidy?
             </h3>
             <p className="text-sm sm:text-base text-sky-200 max-w-xl">
-              SolarShop handles the entire end-to-end paperwork: technical feasibility, Discom
+              Aethel Renewables (T & S Infraproject Pvt Ltd) handles the entire end-to-end paperwork: technical feasibility, Discom
               coordination, net-meter installation, and portal documentation.
             </p>
           </div>

@@ -5,7 +5,7 @@ const port = parseInt(process.env.MAIL_PORT || '587', 10);
 const user = process.env.MAIL_USERNAME || '';
 const pass = process.env.MAIL_PASSWORD || '';
 const fromEmail = process.env.MAIL_FROM_ADDRESS || 'dr.ti@gmail.com';
-const fromName = process.env.MAIL_FROM_NAME || 'SolarShop India';
+const fromName = process.env.MAIL_FROM_NAME || 'Aethel Renewables';
 const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
 
 const transporter = nodemailer.createTransport({
@@ -146,7 +146,7 @@ export async function sendQuoteRequestConfirmationToCustomer(data: {
             <li>You will receive an itemized, formal quotation directly to this email within 24–48 hours.</li>
           </ol>
 
-          <p style="margin-top: 24px;">You can track the progress of your quote anytime by signing in to your SolarShop account.</p>
+          <p style="margin-top: 24px;">You can track the progress of your quote anytime by signing in to your Aethel account.</p>
 
           <div style="margin: 28px 0; text-align: center;">
             <a href="${appUrl}/my-quotes" style="background-color: #0f172a; color: #ffffff; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block;">
@@ -156,7 +156,7 @@ export async function sendQuoteRequestConfirmationToCustomer(data: {
 
           <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 24px 0;" />
           <p style="font-size: 13px; color: #64748b; text-align: center; margin: 0;">
-            SolarShop India &bull; Renewable Energy Solutions &bull; Helpline: +91 1800-2121-SUN
+            Aethel Renewables &bull; T &amp; S Infraproject Pvt Ltd &bull; Kolkata 700056 &bull; Contact: +91 96144 75087 &bull; tandsinfra@gmail.com
           </p>
         </div>
       </div>
@@ -165,7 +165,7 @@ export async function sendQuoteRequestConfirmationToCustomer(data: {
     const info = await transporter.sendMail({
       from: `"${fromName}" <${fromEmail}>`,
       to: data.customerEmail,
-      subject: `Quotation Request Received (#${data.quoteRequestId.slice(-6)}) - SolarShop`,
+      subject: `Quotation Request Received (#${data.quoteRequestId.slice(-6)}) - Aethel Renewables`,
       html,
     });
 
@@ -290,7 +290,7 @@ export async function sendQuotationToCustomer(data: {
     const info = await transporter.sendMail({
       from: `"${fromName}" <${fromEmail}>`,
       to: data.customerEmail,
-      subject: `Your Solar Solution Quotation is Ready (#${data.quotationId.slice(-6)}) - SolarShop`,
+      subject: `Your Solar Solution Quotation is Ready (#${data.quotationId.slice(-6)}) - Aethel Renewables`,
       html,
     });
 

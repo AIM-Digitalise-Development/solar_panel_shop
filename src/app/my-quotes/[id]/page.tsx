@@ -177,7 +177,7 @@ export default function QuoteDetailCustomerPage() {
           <div className="bg-linear-to-r from-sky-900 via-blue-900 to-teal-900 text-white p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 text-amber-300 text-xs font-bold uppercase tracking-wider mb-1">
-                <Sun className="w-4 h-4 fill-amber-300" /> Official SolarShop Commercial Quotation
+                <Sun className="w-4 h-4 fill-amber-300" /> Official Aethel Renewables Commercial Quotation • T & S Infraproject Pvt Ltd
               </div>
               <h2 className="text-2xl sm:text-3xl font-black">
                 Quotation #{quotation._id.slice(-6).toUpperCase()}
@@ -274,7 +274,7 @@ export default function QuoteDetailCustomerPage() {
               </h4>
               <p className="leading-relaxed text-amber-900">{quotation.terms}</p>
               <p className="text-[11px] text-amber-800 pt-1 border-t border-amber-200">
-                *Payment is completed offline directly to SolarShop India&apos;s verified bank
+                *Payment is completed offline directly to Aethel India&apos;s verified bank
                 account following technical rooftop audit.
               </p>
             </div>

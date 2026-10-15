@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import React, { useState, useEffect } from "react";
+import { Logo } from "@/components/Logo";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
@@ -81,18 +82,20 @@ export default function RegisterPage() {
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-lg space-y-6">
-        <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-amber-400 to-orange-500 text-white flex items-center justify-center mx-auto shadow-md">
-            <Sun className="w-7 h-7" />
+        <div className="text-center space-y-3">
+          <Link href="/" className="inline-block py-1">
+            <Logo variant="dark" className="h-14 w-auto mx-auto" />
+          </Link>
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              {isFirstRun ? "Initialize Aethel Administrator" : "Create Your Aethel Account"}
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-500 mt-1">
+              {isFirstRun
+                ? "First-time setup detected. Register the primary root administrator for Aethel Renewables."
+                : "Aethel Renewables by T & S Infraproject Pvt Ltd &bull; Track quotations and subsidies."}
+            </p>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-            {isFirstRun ? "Initialize Administrator Account" : "Create Your SolarShop Account"}
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-500">
-            {isFirstRun
-              ? "First-time setup detected. Register the primary root administrator account for this platform."
-              : "Join thousands of homeowners tracking quotations and government solar subsidies."}
-          </p>
         </div>
 
         {/* First-Time Setup Banner */}

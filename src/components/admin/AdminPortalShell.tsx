@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { Logo } from "@/components/Logo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
@@ -111,18 +112,13 @@ export function AdminPortalShell({
     <div className="flex flex-col h-full bg-slate-950 text-slate-200 border-r border-slate-800 select-none">
       {/* Brand Header */}
       <div className="p-5 border-b border-slate-800/80 bg-slate-900/40">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-linear-to-br from-amber-400 to-orange-500 text-white flex items-center justify-center font-black shadow-lg shadow-orange-500/20 shrink-0">
-            <Sun className="w-6 h-6" />
-          </div>
-          <div className="overflow-hidden">
-            <div className="flex items-center gap-1.5">
-              <span className="font-black text-white tracking-tight text-base">SolarShop</span>
-              <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-md bg-amber-400/20 text-amber-400 border border-amber-400/30">
-                Admin
-              </span>
-            </div>
-            <p className="text-[11px] text-slate-400 truncate">Operations & Engineering Hub</p>
+        <div className="space-y-2">
+          <Logo variant="white" className="h-9 w-auto" />
+          <div className="flex items-center justify-between pt-1">
+            <span className="text-[10px] font-bold tracking-wider uppercase text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2 py-0.5 rounded-md">
+              Operations Hub
+            </span>
+            <span className="text-[10px] text-slate-400 font-medium">T &amp; S Infraproject</span>
           </div>
         </div>
 
@@ -281,8 +277,8 @@ export function AdminPortalShell({
 
             <div>
               <div className="flex items-center gap-2 text-xs text-slate-600 font-medium">
-                <span>Admin Portal</span>
-                <ChevronRight className="w-3.5 h-3.5" />
+                <span className="font-bold text-emerald-700">Aethel Admin</span>
+                <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
                 <span className="text-slate-900 font-semibold">{getPageTitle()}</span>
               </div>
             </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { Logo } from "@/components/Logo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
@@ -70,8 +71,8 @@ export function Navbar() {
       <div className="bg-linear-to-r from-sky-900 via-blue-900 to-teal-900 text-white text-xs py-1.5 px-4">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1.5">
           <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1 font-semibold text-amber-300">
-              <Sparkles className="w-3.5 h-3.5" /> PM Surya Ghar Scheme
+            <span className="flex items-center gap-1.5 font-bold text-emerald-300">
+              <Sparkles className="w-3.5 h-3.5 text-amber-300" /> Aethel Renewables &bull; T &amp; S Infraproject
             </span>
             <span className="hidden md:inline text-sky-200">|</span>
             <span className="hidden md:inline text-sky-100">
@@ -87,7 +88,7 @@ export function Navbar() {
             <span>|</span>
             <div className="flex items-center gap-1">
               <PhoneCall className="w-3 h-3 text-sky-300" />
-              <span>Toll Free: 1800-SOLAR-00</span>
+              <span>+91 96144 75087</span>
             </div>
           </div>
         </div>
@@ -97,23 +98,8 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 gap-4">
           {/* Logo & Brand */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-            <div className="w-11 h-11 rounded-2xl bg-linear-to-br from-amber-400 via-orange-500 to-amber-600 text-white flex items-center justify-center shadow-lg shadow-orange-500/20 group-hover:scale-105 transition-all">
-              <Sun className="w-6 h-6 animate-spin-slow" />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                  Solar<span className="text-sky-600">Shop</span>
-                </span>
-                <span className="px-1.5 py-0.5 text-[10px] font-bold bg-amber-100 text-amber-800 rounded-md">
-                  INDIA
-                </span>
-              </div>
-              <p className="text-[10px] font-semibold text-slate-400 tracking-wider uppercase">
-                Clean Rooftop Power
-              </p>
-            </div>
+          <Link href="/" className="flex items-center gap-3 shrink-0 py-1 group">
+            <Logo variant="dark" className="h-10 sm:h-12 w-auto" />
           </Link>
 
           {/* Desktop Navigation Links */}

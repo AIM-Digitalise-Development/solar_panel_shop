@@ -97,14 +97,14 @@ export default async function HomePage() {
       city: "Pune, Maharashtra",
       rating: 5,
       system: "3.2 kW Rooftop Mono PERC",
-      text: "Our monthly MSEDCL bill used to hover around ₹3,800. After installing SolarShop's PM Surya Ghar kit, our bill dropped to under ₹250! The subsidy of ₹78,000 arrived in my SBI account in 28 days.",
+      text: "Our monthly MSEDCL bill used to hover around ₹3,800. After installing Aethel's PM Surya Ghar kit, our bill dropped to under ₹250! The subsidy of ₹78,000 arrived in my SBI account in 28 days.",
     },
     {
       name: "Ananya Deshmukh",
       city: "Ahmedabad, Gujarat",
       rating: 5,
       system: "5 kW Dual-Glass Bifacial System",
-      text: "The quotation process was completely transparent. The SolarShop advisor came for rooftop shade analysis, sent an itemized quote with GST breakdown, and we handled payment offline via RTGS.",
+      text: "The quotation process was completely transparent. The Aethel engineering advisor came for rooftop shade analysis, sent an itemized quote with GST breakdown, and we handled payment offline via RTGS.",
     },
     {
       name: "Vikas Aggarwal",
@@ -220,7 +220,7 @@ export default async function HomePage() {
             The Solar Advantage
           </span>
           <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mt-3 tracking-tight">
-            Why Switch to Solar with SolarShop?
+            Why Switch to Solar with Aethel Renewables?
           </h2>
           <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
             Transitioning to rooftop solar is India&apos;s smartest home improvement investment.

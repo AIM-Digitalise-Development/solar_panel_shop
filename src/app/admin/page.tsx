@@ -53,10 +53,10 @@ export default async function AdminDashboardPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-              Solar Operations Overview
+              Aethel Operations Overview
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 mt-1">
-              Real-time monitoring of quote inquiries, technical assessments, and equipment inventory.
+              Aethel Renewables &bull; T & S Infraproject Pvt Ltd &bull; Real-time operations, technical assessments, and equipment inventory.
             </p>
           </div>
 

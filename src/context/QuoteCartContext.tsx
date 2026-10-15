@@ -41,7 +41,7 @@ export function QuoteCartProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem("solarshop_quote_cart");
+      const saved = localStorage.getItem("aethel_quote_cart") || localStorage.getItem("solarshop_quote_cart");
       if (saved) {
         setItems(JSON.parse(saved));
       }
@@ -55,7 +55,7 @@ export function QuoteCartProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (isLoaded) {
       try {
-        localStorage.setItem("solarshop_quote_cart", JSON.stringify(items));
+        localStorage.setItem("aethel_quote_cart", JSON.stringify(items));
       } catch (e) {
         console.error("Failed to save quote cart to localStorage", e);
       }

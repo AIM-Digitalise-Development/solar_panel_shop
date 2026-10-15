@@ -67,9 +67,9 @@ export default function ContactPage() {
               <Phone className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="font-bold text-slate-900 text-sm">Customer Toll-Free Support</h4>
+              <h4 className="font-bold text-slate-900 text-sm">Direct Phone & WhatsApp Support</h4>
               <p className="text-xs text-slate-500 mt-0.5">Mon–Sat from 9:00 AM to 7:00 PM IST</p>
-              <p className="text-sm font-black text-sky-700 mt-1">1800-2121-SUN / +91 (022) 6789-SOLAR</p>
+              <p className="text-sm font-black text-sky-700 mt-1">+91 96144 75087</p>
             </div>
           </div>
 
@@ -80,7 +80,7 @@ export default function ContactPage() {
             <div>
               <h4 className="font-bold text-slate-900 text-sm">Official Quotation Desk</h4>
               <p className="text-xs text-slate-500 mt-0.5">Direct responses within 4 hours</p>
-              <p className="text-sm font-semibold text-slate-800 mt-1">quotes@solarshop.in</p>
+              <p className="text-sm font-semibold text-slate-800 mt-1">tandsinfra@gmail.com</p>
             </div>
           </div>
 
@@ -90,8 +90,12 @@ export default function ContactPage() {
             </div>
             <div>
               <h4 className="font-bold text-slate-900 text-sm">Corporate Headquarters</h4>
-              <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-                Solar Innovation Park, Bandra-Kurla Complex (BKC), Mumbai, Maharashtra 400051
+              <p className="text-xs font-semibold text-slate-900 mt-0.5">T &amp; S Infraproject Pvt Ltd</p>
+              <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                100/21, New Basudevpur Road, Belghoria, Kolkata 700056, West Bengal
+              </p>
+              <p className="text-xs font-mono font-bold text-emerald-700 mt-1.5">
+                GST: 19AAJCT6248H1ZV
               </p>
             </div>
           </div>
