@@ -27,6 +27,7 @@ import {
   ArrowUpRight,
   Activity,
   Layers,
+  KeyRound,
 } from "lucide-react";
 
 interface AdminPortalShellProps {
@@ -79,6 +80,12 @@ export function AdminPortalShell({
       icon: Users,
       badge: null,
     },
+    {
+      name: "Settings & Security",
+      href: "/admin/settings",
+      icon: KeyRound,
+      badge: null,
+    },
   ];
 
   const toolsNav = [
@@ -105,6 +112,7 @@ export function AdminPortalShell({
     if (pathname.startsWith("/admin/products")) return "Product Catalog & Stock";
     if (pathname.startsWith("/admin/orders")) return "Orders & Project Execution";
     if (pathname.startsWith("/admin/users")) return "User & Role Directory";
+    if (pathname.startsWith("/admin/settings")) return "Security & Password Settings";
     return "Administration Portal";
   };
 
@@ -214,8 +222,13 @@ export function AdminPortalShell({
 
       {/* Admin User Profile & Sign Out Footer */}
       <div className="p-3 border-t border-slate-800/80 bg-slate-900/50">
-        <div className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2.5 min-w-0">
+        <div className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between gap-2">
+          <Link
+            href="/admin/settings"
+            onClick={() => setMobileOpen(false)}
+            title="Account Settings & Security"
+            className="flex items-center gap-2.5 min-w-0 hover:opacity-80 transition-opacity"
+          >
             <div className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center font-black text-xs shrink-0">
               {user.name ? user.name.slice(0, 2).toUpperCase() : "AD"}
             </div>
@@ -223,15 +236,26 @@ export function AdminPortalShell({
               <p className="text-xs font-bold text-white truncate">{user.name || "Administrator"}</p>
               <p className="text-[10px] text-slate-400 truncate">{user.email || "admin@solarshop.in"}</p>
             </div>
-          </div>
+          </Link>
 
-          <button
-            onClick={() => signOut({ callbackUrl: "/login" })}
-            title="Sign Out of Admin Portal"
-            className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-lg transition-colors shrink-0"
-          >
-            <LogOut className="w-4 h-4" />
-          </button>
+          <div className="flex items-center gap-1 shrink-0">
+            <Link
+              href="/admin/settings"
+              onClick={() => setMobileOpen(false)}
+              title="Change Password & Security"
+              className="p-1.5 text-slate-400 hover:text-amber-400 hover:bg-slate-800 rounded-lg transition-colors"
+            >
+              <KeyRound className="w-4 h-4" />
+            </Link>
+
+            <button
+              onClick={() => signOut({ callbackUrl: "/login" })}
+              title="Sign Out of Admin Portal"
+              className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-lg transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -312,9 +336,13 @@ export function AdminPortalShell({
             <div className="h-6 w-px bg-slate-200 hidden sm:block" />
 
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-linear-to-br from-amber-400 to-orange-500 text-white font-black text-xs flex items-center justify-center shadow-xs">
+              <Link
+                href="/admin/settings"
+                title="Account Settings & Security"
+                className="w-8 h-8 rounded-full bg-linear-to-br from-amber-400 to-orange-500 text-white font-black text-xs flex items-center justify-center shadow-xs hover:ring-2 hover:ring-amber-500/50 transition-all"
+              >
                 {user.name ? user.name[0].toUpperCase() : "A"}
-              </div>
+              </Link>
             </div>
           </div>
         </header>

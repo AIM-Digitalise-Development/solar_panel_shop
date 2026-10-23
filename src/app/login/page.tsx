@@ -128,11 +128,11 @@ function LoginForm() {
           <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
-              onClick={() => handleQuickLogin("admin@solarshop.in", "Admin@123456")}
+              onClick={() => handleQuickLogin("admin.com", "Admin")}
               className="py-1.5 px-2.5 bg-white hover:bg-amber-100 text-amber-900 font-semibold border border-amber-300 rounded-lg text-left transition-colors"
             >
               Fill Admin
-              <span className="block text-[10px] text-amber-700 font-normal">admin@solarshop.in</span>
+              <span className="block text-[10px] text-amber-700 font-normal">admin.com</span>
             </button>
             <button
               type="button"
