@@ -23,6 +23,12 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+interface NavItem {
+  name: string;
+  href: string;
+  badge?: string;
+}
+
 export function Navbar() {
   const { data: session, status } = useSession();
   const role = (session?.user as any)?.role;
@@ -50,12 +56,11 @@ export function Navbar() {
     }
   }, [role, pathname]);
 
-  const navLinks = [
-    { name: "Products", href: "/products" },
-    { name: "PM Surya Ghar", href: "/pm-surya-ghar", badge: "Subsidy" },
-    { name: "Solar Calculator", href: "/solar-calculator" },
-    { name: "Readiness Checklist", href: "/readiness-checklist" },
+  const navLinks: NavItem[] = [
     { name: "About", href: "/about" },
+    { name: "Products", href: "/products" },
+    { name: "Subsidy", href: "/pm-surya-ghar" },
+    { name: "Readiness Checklist", href: "/readiness-checklist" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -144,6 +149,14 @@ export function Navbar() {
               )}
             </Link>
 
+            {/* Calculate Savings Button */}
+            <Link
+              href="/solar-calculator"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-linear-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 rounded-lg shadow-sm shadow-sky-600/20 transition-all hover:shadow-md"
+            >
+              <Calculator className="w-4 h-4" /> Calculate Savings
+            </Link>
+
             {/* Auth Dropdown or Login */}
             {status === "loading" ? (
               <div className="w-8 h-8 rounded-full bg-slate-100 animate-pulse" />
@@ -222,20 +235,12 @@ export function Navbar() {
                 </div>
               )
             ) : (
-              <div className="flex items-center gap-2">
-                <Link
-                  href="/login"
-                  className="px-3.5 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors"
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/solar-calculator"
-                  className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-linear-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 rounded-lg shadow-sm shadow-sky-600/20 transition-all hover:shadow-md"
-                >
-                  <Calculator className="w-4 h-4" /> Calculate Savings
-                </Link>
-              </div>
+              <Link
+                href="/login"
+                className="px-3.5 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors"
+              >
+                Sign In
+              </Link>
             )}
 
             {/* Mobile Hamburger Button */}
@@ -277,6 +282,13 @@ export function Navbar() {
 
           {!session ? (
             <div className="pt-4 border-t border-slate-100 flex flex-col gap-2">
+              <Link
+                href="/solar-calculator"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2 w-full py-2.5 px-4 text-sm font-semibold text-white bg-linear-to-r from-sky-600 to-teal-600 rounded-lg"
+              >
+                <Calculator className="w-4 h-4" /> Calculate Savings
+              </Link>
               <Link
                 href="/login"
                 onClick={() => setMobileMenuOpen(false)}
