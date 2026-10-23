@@ -237,9 +237,10 @@ export function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="px-3.5 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-slate-700 hover:text-sky-600 transition-colors"
               >
-                Sign In
+                <User className="w-4 h-4" />
+                <span>Sign In</span>
               </Link>
             )}
 
@@ -292,9 +293,10 @@ export function Navbar() {
               <Link
                 href="/login"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center py-2.5 px-4 text-sm font-semibold border border-slate-200 rounded-lg text-slate-700"
+                className="w-full flex items-center justify-center gap-2 py-2.5 px-4 text-sm font-semibold border border-slate-200 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors"
               >
-                Customer Sign In
+                <User className="w-4 h-4 text-slate-500" />
+                <span>Customer Sign In</span>
               </Link>
               <Link
                 href="/register"
