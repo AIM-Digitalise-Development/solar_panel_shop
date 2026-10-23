@@ -1,8 +1,7 @@
-﻿import React from "react";
+import React from "react";
 import Link from "next/link";
 import { PMSuryaGharSection } from "@/components/PMSuryaGharSection";
-import { SolarCalculator } from "@/components/SolarCalculator";
-import { Sparkles, Sun, ShieldCheck, ArrowRight, Award, CheckCircle } from "lucide-react";
+import { Sun } from "lucide-react";
 
 export const metadata = {
   title: "PM Surya Ghar: Muft Bijli Yojana Guide & Subsidies | SolarShop",
@@ -49,19 +48,6 @@ export default function PMSuryaGharPage() {
 
       {/* Embedded Component */}
       <PMSuryaGharSection />
-
-      {/* Embedded Calculator */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-8">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
-            Simulate Your Rooftop Sizing &amp; Subsidy
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 mt-1">
-            Choose your appliances below to verify your monthly units and exact subsidy tier.
-          </p>
-        </div>
-        <SolarCalculator />
-      </div>
     </div>
   );
 }
